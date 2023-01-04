@@ -1,0 +1,20 @@
+# Используем язык java.
+language: java
+# Режим обычного пользователя для сборки проекта.
+sudo: false
+# Запуск скрипта, который будет собирать статистику по JaCoCo.
+after_success:
+- bash <(curl -s https://codecov.io/bash)
+# Отправлять уведомление на почту если сборка упала.
+notifications:
+  email:
+    recipients:
+    - noved256@gmail.com
+    on_success: never # default: change
+    on_failure: always # default: always
+
+services:
+  - postgresql
+
+before_install:
+  - psql -c 'create database items;' -U postgres
